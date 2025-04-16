@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vidyara - AI Study Assistant </title>
+  <link rel="icon" href="Vidyaralogo.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head> 
+<body>
+  <div class="container">
+    <img src="Vidyaralogo.png" alt="Vidyara AI" width="150px" />
+    <h1>Vidyara</h1>      
+    <h2>AI Study Assistant</h2>
+    <textarea id="inputText" placeholder="Enter chapter name or content..."></textarea>
+    <div class="buttons">
+      <button onclick="generateSummary()">Generate Summary</button>
+      <button onclick="generateQuestions()">Generate Questions</button>
+      <button onclick="extractKeyNotes()">Extract Key Notes</button>
+      <!-- Copy, Print and Save as PDF buttons -->
+      <button id="copyBtn">Copy</button>
+      <button id="printBtn">Print</button>
+      <button id="saveBtn">Save as PDF</button>
+      
+<!-- Example content (Summary, Questions, Key Notes) -->
+<div id="content">
+    <div id="summary">
+        <h2>Summary</h2>
+        <p>Your summary content here...</p>
+    </div>
+
+    <div id="questions">
+        <h2>Questions</h2>
+        <p>Your questions content here...</p>
+    </div>
+
+    <div id="keynotes">
+        <h2>Key Notes</h2>
+        <p>Your key notes content here...</p>
+    </div>
+
+    <div id="summary"></div>
+    <div id="questions"></div>
+    <div id="keynotes"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+</body>
+</html>
+
