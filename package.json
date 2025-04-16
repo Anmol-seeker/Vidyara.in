@@ -1,0 +1,24 @@
+{
+  "name": "vidyara",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anmol-seeker/Vidyara.in.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Anmol-seeker/Vidyara.in/issues"
+  },
+  "homepage": "https://github.com/Anmol-seeker/Vidyara.in#readme",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}
