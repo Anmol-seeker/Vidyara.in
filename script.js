@@ -1,27 +1,19 @@
-// Renders output content
-function renderOutput(sectionId, content) {
-  const outputDiv = document.getElementById(sectionId);
-  if (outputDiv) {
-    outputDiv.innerHTML = `
-      <div class="output-card">
-        <pre>${content}</pre>
-        <div class="output-buttons">
-          <button onclick="copyToClipboard('${sectionId}')">Copy</button>
-          <button onclick="saveAsPDF('${sectionId}')">Save as PDF</button>
-        </div>
-      </div>
-    `;
-  }
-}
-
 // Get input from textarea
 function getInputText() {
-  return {
-    text: document.getElementById("inputText").value,
-    level: document.getElementById("levelSelect").value
-  };
+  const inputText = document.getElementById('inputText');
+  const levelDropdown = document.getElementById('leveldropdown');
+  
+  if (!inputText || !levelDropdown) {
+    console.error('Missing element');
+    return { text: "", level: "" };
+  }
+  
+  const text = inputText.value;
+  const level = levelDropdown.value;
+  
+  console.log(text, level);
+  return { text, level };
 }
-
 
 // Call OpenAI via Netlify Function or your backend
 async function callOpenAI(prompt) {
@@ -46,6 +38,11 @@ async function callOpenAI(prompt) {
 // Generate Summary
 async function generateSummary() {
   const input = getInputText();
+  if (!input.text || !input.level) {
+    alert("Please provide input text and select a level.");
+    return;
+  }
+  
   const text = input.text;
   const level = input.level;
 
@@ -54,11 +51,14 @@ async function generateSummary() {
   renderOutput("summaryOutput", summary);
 }
 
-
 // Generate Questions
 async function generateQuestions() {
   const { text, level } = getInputText();
-
+  if (!text || !level) {
+    alert("Please provide input text and select a level.");
+    return;
+  }
+  
   const prompt = `
 Based on the following content, create 5 theory questions with answers, 5 MCQs with answers, 5 fill in the blanks with answers, and 5 true/false questions with answers and format them in well mannered structure. The questions should be appropriate for a ${level.toLowerCase()}-level learner. Here’s the content:\n\n${text}`;
   
@@ -66,20 +66,38 @@ Based on the following content, create 5 theory questions with answers, 5 MCQs w
   renderOutput("questionsOutput", questions);
 }
 
-
 // Extract Key Notes
 async function extractKeyNotes() {
   const { text, level } = getInputText();
-
+  if (!text || !level) {
+    alert("Please provide input text and select a level.");
+    return;
+  }
+  
   const prompt = `Extract 10–15 informative bullet-point key notes from the following chapter. Make sure they match the understanding level of a ${level.toLowerCase()}-level student:\n\n${text}`;
   
   const keynotes = await callOpenAI(prompt);
   renderOutput("keynotesOutput", keynotes);
 }
 
+// Render output content
+function renderOutput(sectionId, content) {
+  const outputDiv = document.getElementById(sectionId);
+  if (outputDiv) {
+    outputDiv.innerHTML = `
+      <div class="output-card">
+        <pre>${content}</pre>
+        <div class="output-buttons">
+          <button onclick="copyText('${sectionId}')">Copy</button>
+          <button onclick="saveAsPDF('${sectionId}')">Save as PDF</button>
+        </div>
+      </div>
+    `;
+  }
+}
 
-// Copy to Clipboard
-function copyToClipboard(id) {
+// Copy Text
+function copyText(id) {
   const text = document.getElementById(id).innerText;
   navigator.clipboard.writeText(text).then(() => {
     alert("Copied!");
