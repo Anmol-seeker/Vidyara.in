@@ -20,7 +20,13 @@ h1 {
 
 h2 {
   font-size: 1.5rem;
-  color: #b3a778;
+  color: #c4cef0;
+  margin-top: 5px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: #553e1a;
   margin-top: 5px;
 }
 
@@ -56,7 +62,7 @@ button:hover {
 
 /* Output Card */
 .output-card {
-  background-color: #D4AF37;
+  background-color: #FAEBD7;
   padding: 20px;
   margin: 20px auto;
   border-radius: 12px;
@@ -110,4 +116,69 @@ button:hover {
   top: 10px;
   right: 10px;
   z-index: 1000;
+}
+
+/* Styling for the select container */
+.select-container {
+  display: flex;
+  align-items: center;  /* Align label and dropdown vertically */
+  width: 250px;  /* Adjust width as needed */
+  margin: 20px 0;
+}
+
+/* Label for the dropdown */
+.select-label {
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(223, 255, 246);
+  margin-right: 10px; /* Space between label and dropdown */
+}
+
+/* Style for the select box */
+.select-box {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #e4e9ee;
+  border: 2px solid #333;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  appearance: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-appearance: none; /* For Safari */
+  -moz-appearance: none; /* For Firefox */
+  position: relative; /* To position the arrow inside */
+}
+
+/* Custom dropdown arrow */
+.select-box::after {
+  content: ' ▼'; /* Dropdown arrow */
+  font-size: 14px;
+  position: absolute;
+  right: 10px; /* Position the arrow on the right */
+  top: 50%;
+  transform: translateY(-50%);
+  color: #000000;
+  pointer-events: none; /* Ensures it doesn't block the dropdown */
+}
+
+/* Hover effect */
+.select-box:hover {
+  border-color: royalblue;
+  background-color: #f0f0f0;
+}
+
+/* Focus effect */
+.select-box:focus {
+  outline: none;
+  border-color: royalblue;
+  background-color: #f0f0f0;
+}
+
+/* Styling for the dropdown items */
+.select-box option {
+  font-size: 16px;
+  padding: 10px;
 }

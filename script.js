@@ -16,8 +16,12 @@ function renderOutput(sectionId, content) {
 
 // Get input from textarea
 function getInputText() {
-  return document.getElementById("inputText").value;
+  return {
+    text: document.getElementById("inputText").value,
+    level: document.getElementById("levelSelect").value
+  };
 }
+
 
 // Call OpenAI via Netlify Function or your backend
 async function callOpenAI(prompt) {
@@ -41,27 +45,38 @@ async function callOpenAI(prompt) {
 
 // Generate Summary
 async function generateSummary() {
-  const text = getInputText();
-  const prompt = `Provide a clear, informative, and easy-to-understand summary of the following chapter:\n\n${text}`;
+  const input = getInputText();
+  const text = input.text;
+  const level = input.level;
+
+  const prompt = `Provide a clear, informative, and ${level.toLowerCase()}-level summary of the following chapter:\n\n${text}`;
   const summary = await callOpenAI(prompt);
   renderOutput("summaryOutput", summary);
 }
 
+
 // Generate Questions
 async function generateQuestions() {
-  const text = getInputText();
-  const prompt = `Based on the following content, create 5 theory questions, 5 MCQs, 5 fill in the blanks, and 5 true/false questions with answers. Here’s the content:\n\n${text}`;
+  const { text, level } = getInputText();
+
+  const prompt = `
+Based on the following content, create 5 theory questions with answers, 5 MCQs with answers, 5 fill in the blanks with answers, and 5 true/false questions with answers and format them in well mannered structure. The questions should be appropriate for a ${level.toLowerCase()}-level learner. Here’s the content:\n\n${text}`;
+  
   const questions = await callOpenAI(prompt);
   renderOutput("questionsOutput", questions);
 }
 
+
 // Extract Key Notes
 async function extractKeyNotes() {
-  const text = getInputText();
-  const prompt = `Extract 10–15 informative bullet-point key notes from the following chapter:\n\n${text}`;
+  const { text, level } = getInputText();
+
+  const prompt = `Extract 10–15 informative bullet-point key notes from the following chapter. Make sure they match the understanding level of a ${level.toLowerCase()}-level student:\n\n${text}`;
+  
   const keynotes = await callOpenAI(prompt);
   renderOutput("keynotesOutput", keynotes);
 }
+
 
 // Copy to Clipboard
 function copyToClipboard(id) {
@@ -75,8 +90,24 @@ function copyToClipboard(id) {
 function saveAsPDF(id) {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
-  const text = document.getElementById(id).innerText;
-  const lines = doc.splitTextToSize(text, 180); // Wrap text
-  doc.text(lines, 10, 10);
+
+  const content = document.getElementById(id).innerText;
+  
+  const pageHeight = doc.internal.pageSize.height;
+  const margin = 10;
+  const lineHeight = 10;
+
+  const lines = doc.splitTextToSize(content, 180); // 180 = max width of text
+  let y = margin;
+
+  for (let i = 0; i < lines.length; i++) {
+    if (y + lineHeight > pageHeight - margin) {
+      doc.addPage();
+      y = margin;
+    }
+    doc.text(lines[i], margin, y);
+    y += lineHeight;
+  }
+
   doc.save(`${id}.pdf`);
 }
