@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/Anmol-seeker/Vidyara.in#readme",
   "dependencies": {
-    "node-fetch": "^3.3.2"
+    "dotenv": "^16.5.0",
+    "node-fetch": "^3.3.2",
+    "openai": "^4.95.1"
   }
 }

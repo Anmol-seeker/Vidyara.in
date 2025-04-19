@@ -1,67 +1,82 @@
-const OPENAI_API_KEY = ""; // Keep your OpenAI API key as needed
-
-
-async function callOpenAI(promptText) {
-  const response = await fetch("/.netlify/functions/openai", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ prompt: promptText }),
-  });
-
-  const data = await response.json();
-  return data.result;
+// Renders output content
+function renderOutput(sectionId, content) {
+  const outputDiv = document.getElementById(sectionId);
+  if (outputDiv) {
+    outputDiv.innerHTML = `
+      <div class="output-card">
+        <pre>${content}</pre>
+        <div class="output-buttons">
+          <button onclick="copyToClipboard('${sectionId}')">Copy</button>
+          <button onclick="saveAsPDF('${sectionId}')">Save as PDF</button>
+        </div>
+      </div>
+    `;
+  }
 }
 
+// Get input from textarea
+function getInputText() {
+  return document.getElementById("inputText").value;
+}
 
+// Call OpenAI via Netlify Function or your backend
+async function callOpenAI(prompt) {
+  try {
+    const response = await fetch("/.netlify/functions/openai", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ prompt }),
+    });
+
+    const data = await response.json();
+    if (!data.text) throw new Error("No text received from server");
+    return data.text;
+  } catch (error) {
+    console.error("Fetch failed:", error);
+    return "❌ An error occurred while fetching AI output.";
+  }
+}
+
+// Generate Summary
 async function generateSummary() {
-  const input = document.getElementById("inputText").value;
-  const prompt = `Summarize the following chapter in a concise manner, explaining what it teaches the reader and highlighting the key moral or life lessons:\n\n${input}`;
-  const result = await callOpenAI(prompt);
-  document.getElementById("summary").innerHTML = `<h2>Summary</h2><p>${result}</p>`;
+  const text = getInputText();
+  const prompt = `Provide a clear, informative, and easy-to-understand summary of the following chapter:\n\n${text}`;
+  const summary = await callOpenAI(prompt);
+  renderOutput("summaryOutput", summary);
 }
 
+// Generate Questions
 async function generateQuestions() {
-  const input = document.getElementById("inputText").value;
-  const prompt = `From the following chapter, generate:
-- 5 Theory-Based Questions with answers
-- 5 True or False Questions with answers
-- 5 Multiple Choice Questions (MCQs) with options and answers
-
-Chapter Content:\n\n${input}`;
-  const result = await callOpenAI(prompt);
-  document.getElementById("questions").innerHTML = `<h2>Questions</h2><p>${result.replace(/\n/g, "<br>")}</p>`;
+  const text = getInputText();
+  const prompt = `Based on the following content, create 5 theory questions, 5 MCQs, 5 fill in the blanks, and 5 true/false questions with answers. Here’s the content:\n\n${text}`;
+  const questions = await callOpenAI(prompt);
+  renderOutput("questionsOutput", questions);
 }
 
+// Extract Key Notes
 async function extractKeyNotes() {
-  const input = document.getElementById("inputText").value;
-  const prompt = `Extract the key points and important takeaways from the following chapter in well-structured bullet points:\n\n${input}`;
-  const result = await callOpenAI(prompt);
-  document.getElementById("keynotes").innerHTML = `<h2>Key Notes</h2><p>${result.replace(/\n/g, "<br>")}</p>`;
+  const text = getInputText();
+  const prompt = `Extract 10–15 informative bullet-point key notes from the following chapter:\n\n${text}`;
+  const keynotes = await callOpenAI(prompt);
+  renderOutput("keynotesOutput", keynotes);
 }
 
-document.getElementById('copyBtn').addEventListener('click', function() {
-  const content = document.getElementById("content").innerText;
-  navigator.clipboard.writeText(content)
-    .then(() => alert('Content copied to clipboard!'))
-    .catch(err => alert('Failed to copy content: ' + err));
-});
+// Copy to Clipboard
+function copyToClipboard(id) {
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    alert("Copied!");
+  });
+}
 
-document.getElementById('printBtn').addEventListener('click', function() {
-  const content = document.getElementById("content").innerHTML;
-  const printWindow = window.open('', '', 'height=600,width=800');
-  printWindow.document.write('<html><head><title>Print</title></head><body>');
-  printWindow.document.write(content);
-  printWindow.document.write('</body></html>');
-  printWindow.document.close();
-  printWindow.print();
-});
-
-document.getElementById('saveBtn').addEventListener('click', function() {
+// Save Section as PDF
+function saveAsPDF(id) {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
-  const content = document.getElementById("content").innerText;
-  doc.text(content, 10, 10);
-  doc.save('content.pdf');
-});
+  const text = document.getElementById(id).innerText;
+  const lines = doc.splitTextToSize(text, 180); // Wrap text
+  doc.text(lines, 10, 10);
+  doc.save(`${id}.pdf`);
+}
