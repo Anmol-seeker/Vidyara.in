@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vidyara - AI Study Assistant</title>
+  <link rel="icon" href="Vidyaralogo.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Loading Spinner (Hidden Initially) -->
+  <div id="loadingIndicator" style="display:none;">Loading...</div>
+
+  <!-- Copy Feedback (Hidden Initially) -->
+  <div id="copyFeedback" style="display:none; color: green;">Copied ✔</div>
+
+  <div class="container">
+    <img src="Vidyaralogo.png" alt="Vidyara AI" width="150px" />
+    <h1>Vidyara</h1>
+    <h2>AI Study Assistant</h2>
+
+    <textarea id="inputText" placeholder="▶️ Enter chapter name (for Summary/Key Notes)…  
+▶️ Or paste full chapter text (for Questions)"></textarea>
+
+<!-- Updated Dropdown Structure -->
+<div class="select-container">
+  <label for="leveldropdown" class="select-label">Select Level:</label>
+  <select id="leveldropdown" class="select-box">
+    <option value="beginner">Beginner</option>
+    <option value="intermediate">Intermediate</option>
+    <option value="expert">Expert</option>
+    <option value="research">Research Level</option>
+  </select>
+</div>
+
+    <small class="note">
+      💡 To get a Summary or Key Notes, you can simply type the chapter name or topic (eg.thermodynamics).  
+      To generate Questions, please paste the full chapter text into the box above.
+    </small>
+
+    <div class="buttons">
+      <button onclick="generateSummary()">Generate Summary</button>
+      <button onclick="generateQuestions()">Generate Questions</button>
+      <button onclick="extractKeyNotes()">Extract Key Notes</button>
+    </div>
+
+    <!-- Output Sections -->
+    <div id="content">
+      <div id="summary" class="output-card">
+        <h3>Summary</h3>
+        <pre id="summaryOutput">Your summary will appear here...</pre>
+        <div class="output-buttons">
+          <button onclick="copyText('summaryOutput')">Copy</button>
+          <button onclick="savePDF('summaryOutput', 'Summary')">Save as PDF</button>
+        </div>
+      </div>
+
+      <div id="questions" class="output-card">
+        <h3>Questions</h3>
+        <pre id="questionsOutput">Your questions will appear here...</pre>
+        <div class="output-buttons">
+          <button onclick="copyText('questionsOutput')">Copy</button>
+          <button onclick="savePDF('questionsOutput', 'Questions')">Save as PDF</button>
+        </div>
+      </div>
+
+      <div id="keynotes" class="output-card">
+        <h3>Key Notes</h3>
+        <pre id="keynotesOutput">Your key notes will appear here...</pre>
+        <div class="output-buttons">
+          <button onclick="copyText('keynotesOutput')">Copy</button>
+          <button onclick="savePDF('keynotesOutput', 'KeyNotes')">Save as PDF</button>
+        </div>
+      </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="script.js"></script>
+<footer>
+  <p>
+    <a href="privacy.html">Privacy Policy</a> |
+    <a href="contact.html">Contact Us</a>
+  </p>
+</footer>
+</body>
+</html>

@@ -1,83 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vidyara - AI Study Assistant</title>
-  <link rel="icon" href="Vidyaralogo.png" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Vidyara</title>
+  <link rel="stylesheet" href="landing.css">
 </head>
 <body>
-
-  <!-- Loading Spinner (Hidden Initially) -->
-  <div id="loadingIndicator" style="display:none;">Loading...</div>
-
-  <!-- Copy Feedback (Hidden Initially) -->
-  <div id="copyFeedback" style="display:none; color: green;">Copied ✔</div>
-
   <div class="container">
-    <img src="Vidyaralogo.png" alt="Vidyara AI" width="150px" />
-    <h1>Vidyara</h1>
-    <h2>AI Study Assistant</h2>
+    <img src="Vidyaralogo.png" alt="Vidyara Logo" class="logo">
+<header>
+    <h1>Welcome to <span class="highlight">Vidyara</span></h1>
+<p>your AI study buddy</p>
+</header>
+    <section class="about">
+      <h2>About Us</h2>
+      <p>
+        At Vidyara, we believe that education is a right, not a privilege. That’s why we’ve built this AI-powered study assistant with one simple goal — to help every student access high-quality learning tools for free.
+Born from the vision of a young student who faced the same challenges as many others, Vidyara was created with love, care, and a deep understanding of student struggles.
+Unlike others, we don’t charge a single rupee. Our priority is your growth. We’re not here to profit off your problems — we’re here to solve them. Let’s learn together, the smart way. 🚀
+      </p>
+    </section>
 
-    <textarea id="inputText" placeholder="▶️ Enter chapter name (for Summary/Key Notes)…  
-▶️ Or paste full chapter text (for Questions)"></textarea>
+    <section class="comparison">
+      <h2>Vidyara vs ChatGPT</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Vidyara</th>
+            <th>ChatGPT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Input Material</td>
+            <td>Upload your own PDFs/Notes</td>
+            <td>Manual copy-paste or limited uploads</td>
+          </tr>
+          <tr>
+            <td>Contextual Accuracy</td>
+            <td>Answers based on your uploaded notes</td>
+            <td>Generalized answers</td>
+          </tr>
+          <tr>
+            <td>UI Simplicity</td>
+            <td>Clean and minimal interface</td>
+            <td>Heavier and multi-purpose</td>
+          </tr>
+          <tr>
+            <td>Focus</td>
+            <td>Built for students only</td>
+            <td>Built for everyone</td>
+          </tr>
+          <tr>
+            <td>Cost</td>
+            <td>Free</td>
+            <td>Premium for full access</td>
+          </tr>
+          <tr>
+            <td>Customization</td>
+            <td>Only you control the input</td>
+            <td>Relies on prompt tuning</td>
+          </tr>
+          <tr>
+            <td>Security</td>
+            <td>No data stored on server</td>
+            <td>Depends on OpenAI policies</td>
+          </tr>
+          <tr>
+            <td>Response Time</td>
+            <td>Optimized for fast responses</td>
+            <td>May vary</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-<!-- Updated Dropdown Structure -->
-<div class="select-container">
-  <label for="leveldropdown" class="select-label">Select Level:</label>
-  <select id="leveldropdown" class="select-box">
-    <option value="beginner">Beginner</option>
-    <option value="intermediate">Intermediate</option>
-    <option value="expert">Expert</option>
-    <option value="research">Research Level</option>
-  </select>
-</div>
-
-    <small class="note">
-      💡 To get a Summary or Key Notes, you can simply type the chapter name or topic (eg.thermodynamics).  
-      To generate Questions, please paste the full chapter text into the box above.
-    </small>
-
-    <div class="buttons">
-      <button onclick="generateSummary()">Generate Summary</button>
-      <button onclick="generateQuestions()">Generate Questions</button>
-      <button onclick="extractKeyNotes()">Extract Key Notes</button>
+    <div class="cta">
+      <a href="main.html" class="btn">Let's Get Started 🚀</a>
     </div>
-
-    <!-- Output Sections -->
-    <div id="content">
-      <div id="summary" class="output-card">
-        <h3>Summary</h3>
-        <pre id="summaryOutput">Your summary will appear here...</pre>
-        <div class="output-buttons">
-          <button onclick="copyText('summaryOutput')">Copy</button>
-          <button onclick="savePDF('summaryOutput', 'Summary')">Save as PDF</button>
-        </div>
-      </div>
-
-      <div id="questions" class="output-card">
-        <h3>Questions</h3>
-        <pre id="questionsOutput">Your questions will appear here...</pre>
-        <div class="output-buttons">
-          <button onclick="copyText('questionsOutput')">Copy</button>
-          <button onclick="savePDF('questionsOutput', 'Questions')">Save as PDF</button>
-        </div>
-      </div>
-
-      <div id="keynotes" class="output-card">
-        <h3>Key Notes</h3>
-        <pre id="keynotesOutput">Your key notes will appear here...</pre>
-        <div class="output-buttons">
-          <button onclick="copyText('keynotesOutput')">Copy</button>
-          <button onclick="savePDF('keynotesOutput', 'KeyNotes')">Save as PDF</button>
-        </div>
-      </div>
   </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-<script src="script.js"></script>
-
+  <footer>
+    <div class="extra-buttons">
+        <a href="privacy.html" class="small-button">Privacy Policy</a>
+        <a href="contact.html" class="small-button">Contact Us</a>
+      </div>
+  </footer>
 </body>
 </html>

@@ -1,72 +1,83 @@
+/* Page background */
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #1E3A8A;
+  background: linear-gradient(to right, #1c1c1c, #2c2c2c);
+  color: #f1f1f1;
   margin: 0;
   padding: 0;
   text-align: center;
 }
 
+/* Main container */
 .container {
   max-width: 800px;
-  margin: auto;
+  margin: 40px auto;
   padding: 20px;
+  background-color: #2e2e2e;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
-
-h1 {
-  font-size: 3rem;
-  color: #FFD700;
-  margin-bottom: 0;
-}
-
-h2 {
-  font-size: 1.5rem;
-  color: #c4cef0;
-  margin-top: 5px;
-}
-
-h3 {
-  font-size: 1.5rem;
-  color: #553e1a;
-  margin-top: 5px;
-}
-
 textarea {
   width: 100%;
   height: 150px;
   padding: 15px;
   margin-top: 20px;
   font-size: 1rem;
+  background-color: #3a3a3a;
+  color: #f1f1f1;
+  border: 1px solid #555;
   border-radius: 8px;
-  border: 1px solid #F9FAFB;
   resize: vertical;
+  box-sizing: border-box;
 }
 
-.buttons {
-  margin-top: 20px;
+
+/* Headings */
+h1 {
+  font-size: 3rem;
+  color: #00ffd5;
+  margin-bottom: 5px;
 }
 
+h2 {
+  font-size: 1.5rem;
+  color: #00ffd5;
+  margin-top: 10px;
+}
+
+
+/* Helper note text */
+.note {
+  display: block;
+  margin-top: 8px;
+  color: #b0b0b0;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+/* Buttons */
 button {
   padding: 10px 15px;
   margin: 5px;
-  background-color: #2ecc71;
-  color: white;
+  background-color: #00ffd5;
+  color: #000;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #27ae60;
+  background-color: #00c0a0;
 }
 
 /* Output Card */
 .output-card {
-  background-color: #FAEBD7;
+  background-color: #333;
   padding: 20px;
   margin: 20px auto;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   text-align: left;
   max-width: 800px;
 }
@@ -76,33 +87,28 @@ button:hover {
   word-wrap: break-word;
   font-size: 1rem;
   line-height: 1.6;
+  color: #f1f1f1;
 }
 
+/* Output Buttons */
 .output-buttons {
   text-align: right;
   margin-top: 15px;
 }
 
 .output-buttons button {
-  background-color: #3498db;
-  margin-left: 8px;
+  background-color: #00ffd5;
+  color: #000;
 }
 
 .output-buttons button:hover {
-  background-color: #2980b9;
+  background-color: #00c0a0;
 }
 
-.note {
-  display: block;
-  margin-top: 8px;
-  color: #B0B0B0;
-  font-size: 0.9rem;
-  text-align: left;
-}
-
+/* Loading & Copy Feedback */
 #loadingIndicator {
   font-size: 18px;
-  color: #3498db; /* Blue */
+  color: #00ffd5;
   font-weight: bold;
   text-align: center;
   margin-top: 20px;
@@ -110,75 +116,10 @@ button:hover {
 
 #copyFeedback {
   font-size: 16px;
-  color: green;
+  color: #00ffd5;
   font-weight: bold;
   position: absolute;
   top: 10px;
   right: 10px;
   z-index: 1000;
-}
-
-/* Styling for the select container */
-.select-container {
-  display: flex;
-  align-items: center;  /* Align label and dropdown vertically */
-  width: 250px;  /* Adjust width as needed */
-  margin: 20px 0;
-}
-
-/* Label for the dropdown */
-.select-label {
-  font-size: 16px;
-  font-weight: bold;
-  color: rgb(223, 255, 246);
-  margin-right: 10px; /* Space between label and dropdown */
-}
-
-/* Style for the select box */
-.select-box {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  background-color: #e4e9ee;
-  border: 2px solid #333;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  appearance: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  -webkit-appearance: none; /* For Safari */
-  -moz-appearance: none; /* For Firefox */
-  position: relative; /* To position the arrow inside */
-}
-
-/* Custom dropdown arrow */
-.select-box::after {
-  content: ' ▼'; /* Dropdown arrow */
-  font-size: 14px;
-  position: absolute;
-  right: 10px; /* Position the arrow on the right */
-  top: 50%;
-  transform: translateY(-50%);
-  color: #000000;
-  pointer-events: none; /* Ensures it doesn't block the dropdown */
-}
-
-/* Hover effect */
-.select-box:hover {
-  border-color: royalblue;
-  background-color: #f0f0f0;
-}
-
-/* Focus effect */
-.select-box:focus {
-  outline: none;
-  border-color: royalblue;
-  background-color: #f0f0f0;
-}
-
-/* Styling for the dropdown items */
-.select-box option {
-  font-size: 16px;
-  padding: 10px;
 }

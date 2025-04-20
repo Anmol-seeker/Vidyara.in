@@ -129,3 +129,19 @@ function saveAsPDF(id) {
 
   doc.save(`${id}.pdf`);
 }
+
+// Load the Google Analytics script
+(function(){
+  const script = document.createElement('script');
+  script.setAttribute('async', '');
+  script.src = "https://www.googletagmanager.com/gtag/js?id=G-ZKDBPCPJGQ";
+  document.head.appendChild(script);
+
+  // Set up the GA config
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  window.gtag = gtag;
+  gtag('js', new Date());
+  gtag('config', 'G-ZKDBPCPJGQ');
+})();
+
