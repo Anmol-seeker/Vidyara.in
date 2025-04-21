@@ -26,12 +26,20 @@ async function callOpenAI(prompt) {
       body: JSON.stringify({ prompt }),
     });
 
+    if (!response.ok) {
+      throw new Error(`Server responded with status ${response.status}`);
+    }
+
     const data = await response.json();
-    if (!data.text) throw new Error("No text received from server");
+
+    if (!data || !data.text) {
+      throw new Error("Invalid response structure");
+    }
+
     return data.text;
   } catch (error) {
     console.error("Fetch failed:", error);
-    return "❌ An error occurred while fetching AI output.";
+    return "❌ An error occurred while fetching AI output. Please try again later.";
   }
 }
 

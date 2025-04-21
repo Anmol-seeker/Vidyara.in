@@ -1,45 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic Meta -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vidyara - AI Study buddy</title>
-  <link rel="icon" href="Vidyaralogo.png" type="image/x-icon">
+  <meta name="description" content="Vidyara is a free AI-powered study notes generator for students. Summarize, extract key notes, and generate questions from your uploaded study material, PDFs, or text.">
+  <meta name="keywords" content="AI study notes maker, study assistant, AI education tool, generate questions from notes, summarize chapters, extract key points, PDF to notes, Vidyara, AI for students">
+  <meta name="author" content="Team Vidyara">
+
+  <!-- Title & Favicon -->
+  <title>Vidyara - AI Study Notes Maker & Question Generator</title>
+  <link rel="icon" href="vidyaralogo.png" type="image/png">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Vidyara - AI Study Notes Generator & Question Maker">
+  <meta property="og:description" content="Use AI to generate notes, summaries, and questions from your own PDFs or study materials. A perfect free tool for students!">
+  <meta property="og:image" content="https://vidyara.in/images/vidyaralogo.png">
+  <meta property="og:url" content="https://vidyara.in/main.html">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vidyara - AI Study Assistant for Students">
+  <meta name="twitter:description" content="Summarize chapters, extract key notes, and generate questions using AI from your uploaded notes or text. Completely free.">
+  <meta name="twitter:image" content="https://vidyara.in/images/vidyaralogo.png">
+
+  <!-- Fonts & Styles -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7523145704189271"
-     crossorigin="anonymous"></script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7523145704189271" crossorigin="anonymous"></script>
 </head>
+
 <body>
-
-  <!-- Loading Spinner (Hidden Initially) -->
-  <div id="loadingIndicator" style="display:none;">Loading...</div>
-
-  <!-- Copy Feedback (Hidden Initially) -->
-  <div id="copyFeedback" style="display:none; color: green;">Copied ✔</div>
-
   <div class="container">
-    <img src="Vidyaralogo.png" alt="Vidyara AI" width="150px" />
+    <img src="vidyaralogo.png" alt="Vidyara Logo - AI Study Assistant" width="150px" />
     <h1>Vidyara</h1>
-    <h2>AI Study Assistant</h2>
+    <h2>Your AI Study Assistant</h2>
 
-    <textarea id="inputText" placeholder="▶️ Enter chapter name (for Summary/Key Notes)…  
-▶️ Or paste full chapter text (for Questions)"></textarea>
+    <textarea id="inputText" placeholder="📝 Type a chapter name for Summary or Key Notes
+📄 Or paste your full notes/text to generate Questions..."></textarea>
 
-<!-- Updated Dropdown Structure -->
-<div class="select-container">
-  <label for="leveldropdown" class="select-label">Select Level:</label>
-  <select id="leveldropdown" class="select-box">
-    <option value="beginner">Beginner</option>
-    <option value="intermediate">Intermediate</option>
-    <option value="expert">Expert</option>
-    <option value="research">Research Level</option>
-  </select>
-</div>
+    <div class="select-container">
+      <label for="leveldropdown" class="select-label">Select Difficulty Level:</label>
+      <select id="leveldropdown" class="select-box">
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="expert">Expert</option>
+        <option value="research">Research Level</option>
+      </select>
+    </div>
 
     <small class="note">
-      💡 To get a Summary or Key Notes, you can simply type the chapter name or topic (eg.thermodynamics).  
-      To generate Questions, please paste the full chapter text into the box above.
+      💡 Want a Summary or Key Notes? Just type the chapter name.  
+      Want Questions? Paste your entire study material or PDF content above.
     </small>
 
     <div class="buttons">
@@ -76,15 +91,17 @@
           <button onclick="savePDF('keynotesOutput', 'KeyNotes')">Save as PDF</button>
         </div>
       </div>
-  </div>
+    </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-<script src="script.js"></script>
-<footer>
-  <p>
-    <a href="privacy.html">Privacy Policy</a> |
-    <a href="contact.html">Contact Us</a>
-  </p>
-</footer>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+  </div>
+  <footer>
+    <div class="extra-buttons">
+      <a href="privacy.html" class="small-button">Privacy Policy</a>
+      <a href="contact.html" class="small-button">Contact Us</a>
+    </div>
+  </footer>
 </body>
 </html>

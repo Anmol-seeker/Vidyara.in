@@ -4,4 +4,4 @@
 
 [dev]
   functions = "netlify/functions"
- 
+  dotenv = ".env"
